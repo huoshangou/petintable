@@ -7,6 +7,8 @@
       0,
       7
     ],
+    "group_scale": 0.4539,
+    "unified_anchor_x": 84.5,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -20,7 +22,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 99.0
       },
       {
         "file": "frame_01.png",
@@ -34,7 +37,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 94.5
       },
       {
         "file": "frame_02.png",
@@ -48,7 +52,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 89.5
       },
       {
         "file": "frame_03.png",
@@ -62,7 +67,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.5
       },
       {
         "file": "frame_04.png",
@@ -76,7 +82,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.5
       },
       {
         "file": "frame_05.png",
@@ -90,7 +97,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.0
       },
       {
         "file": "frame_06.png",
@@ -104,7 +112,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 72.5
       },
       {
         "file": "frame_07.png",
@@ -118,7 +127,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 68.5
       }
     ]
   },
@@ -130,6 +140,8 @@
       0,
       7
     ],
+    "group_scale": 0.4211,
+    "unified_anchor_x": 89.0,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -143,7 +155,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 99.0
       },
       {
         "file": "frame_01.png",
@@ -157,7 +170,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 94.0
       },
       {
         "file": "frame_02.png",
@@ -171,7 +185,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 98.0
       },
       {
         "file": "frame_03.png",
@@ -185,7 +200,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 89.0
       },
       {
         "file": "frame_04.png",
@@ -199,7 +215,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 83.5
       },
       {
         "file": "frame_05.png",
@@ -213,7 +230,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 77.0
       },
       {
         "file": "frame_06.png",
@@ -227,7 +245,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 71.5
       },
       {
         "file": "frame_07.png",
@@ -241,7 +260,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 69.0
       }
     ]
   },
@@ -253,6 +273,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 87.0,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -266,7 +288,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 94.5
       },
       {
         "file": "frame_01.png",
@@ -280,7 +303,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 100.5
       },
       {
         "file": "frame_02.png",
@@ -294,7 +318,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 93.0
       },
       {
         "file": "frame_03.png",
@@ -308,7 +333,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 87.0
       },
       {
         "file": "frame_04.png",
@@ -322,7 +348,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 80.0
       },
       {
         "file": "frame_05.png",
@@ -336,7 +363,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 72.5
       },
       {
         "file": "frame_06.png",
@@ -350,7 +378,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 68.0
       },
       {
         "file": "frame_07.png",
@@ -364,7 +393,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 64.0
       }
     ]
   },
@@ -376,6 +406,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 84.5,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -389,7 +421,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 90.0
       },
       {
         "file": "frame_01.png",
@@ -403,7 +436,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 96.5
       },
       {
         "file": "frame_02.png",
@@ -417,7 +451,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 91.5
       },
       {
         "file": "frame_03.png",
@@ -431,7 +466,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.5
       },
       {
         "file": "frame_04.png",
@@ -445,7 +481,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 79.0
       },
       {
         "file": "frame_05.png",
@@ -459,7 +496,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 72.0
       },
       {
         "file": "frame_06.png",
@@ -473,7 +511,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 69.5
       },
       {
         "file": "frame_07.png",
@@ -487,7 +526,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 67.5
       }
     ]
   },
@@ -499,6 +539,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 91.5,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -512,7 +554,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 100.5
       },
       {
         "file": "frame_01.png",
@@ -526,7 +569,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 101.5
       },
       {
         "file": "frame_02.png",
@@ -540,7 +584,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 97.0
       },
       {
         "file": "frame_03.png",
@@ -554,7 +599,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 91.5
       },
       {
         "file": "frame_04.png",
@@ -568,7 +614,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 86.0
       },
       {
         "file": "frame_05.png",
@@ -582,7 +629,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 80.5
       },
       {
         "file": "frame_06.png",
@@ -596,7 +644,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 77.0
       },
       {
         "file": "frame_07.png",
@@ -610,7 +659,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 68.0
       }
     ]
   },
@@ -622,6 +672,8 @@
       0,
       7
     ],
+    "group_scale": 0.4354,
+    "unified_anchor_x": 84.5,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -635,7 +687,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 99.0
       },
       {
         "file": "frame_01.png",
@@ -649,7 +702,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 94.0
       },
       {
         "file": "frame_02.png",
@@ -663,7 +717,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 90.0
       },
       {
         "file": "frame_03.png",
@@ -677,7 +732,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.0
       },
       {
         "file": "frame_04.png",
@@ -691,7 +747,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.5
       },
       {
         "file": "frame_05.png",
@@ -705,7 +762,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.5
       },
       {
         "file": "frame_06.png",
@@ -719,7 +777,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 73.0
       },
       {
         "file": "frame_07.png",
@@ -733,7 +792,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 68.0
       }
     ]
   },
@@ -745,6 +805,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 92.5,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -758,7 +820,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 103.5
       },
       {
         "file": "frame_01.png",
@@ -772,7 +835,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 100.0
       },
       {
         "file": "frame_02.png",
@@ -786,7 +850,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 97.5
       },
       {
         "file": "frame_03.png",
@@ -800,7 +865,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 92.5
       },
       {
         "file": "frame_04.png",
@@ -814,7 +880,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 89.0
       },
       {
         "file": "frame_05.png",
@@ -828,7 +895,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 82.0
       },
       {
         "file": "frame_06.png",
@@ -842,7 +910,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 78.0
       },
       {
         "file": "frame_07.png",
@@ -856,7 +925,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.5
       }
     ]
   },
@@ -868,6 +938,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 76.0,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -881,7 +953,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 90.5
       },
       {
         "file": "frame_01.png",
@@ -895,7 +968,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 87.5
       },
       {
         "file": "frame_02.png",
@@ -909,7 +983,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 84.5
       },
       {
         "file": "frame_03.png",
@@ -923,7 +998,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.0
       },
       {
         "file": "frame_04.png",
@@ -937,7 +1013,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 74.5
       },
       {
         "file": "frame_05.png",
@@ -951,7 +1028,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 67.5
       },
       {
         "file": "frame_06.png",
@@ -965,7 +1043,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 64.0
       },
       {
         "file": "frame_07.png",
@@ -979,7 +1058,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 59.5
       }
     ]
   },
@@ -991,6 +1071,8 @@
       0,
       7
     ],
+    "group_scale": 0.3636,
+    "unified_anchor_x": 96.0,
     "frame_files": [
       {
         "file": "frame_00.png",
@@ -1004,7 +1086,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 98.5
       },
       {
         "file": "frame_01.png",
@@ -1018,7 +1101,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 103.0
       },
       {
         "file": "frame_02.png",
@@ -1032,7 +1116,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 97.0
       },
       {
         "file": "frame_03.png",
@@ -1046,7 +1131,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 96.0
       },
       {
         "file": "frame_04.png",
@@ -1060,7 +1146,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 85.5
       },
       {
         "file": "frame_05.png",
@@ -1074,7 +1161,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 77.0
       },
       {
         "file": "frame_06.png",
@@ -1088,7 +1176,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.5
       },
       {
         "file": "frame_07.png",
@@ -1102,7 +1191,8 @@
         "orig_size": [
           176,
           192
-        ]
+        ],
+        "foot_anchor_x": 76.5
       }
     ]
   }

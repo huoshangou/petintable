@@ -12,9 +12,9 @@ Vibe is a frameless, transparent, always-on-top pixel bird. It tracks your Claud
 
 | State | Animation | Trigger |
 |-------|-----------|---------|
-| **Idle** | Bird stands still, no glasses | No Claude Code running, or terminal not in foreground |
-| **Coding** | Bird puts on glasses and types furiously | Claude Code is actively working (high CPU) |
-| **Question** | Bird tilts head with a question mark | Claude Code is waiting for your input (Y/N, permission, etc.) |
+| **Idle** | Bird stands still, no glasses | Agent resting / user typing / no session active |
+| **Coding** | Bird puts on glasses and types furiously | Agent is actively generating (via VS Code Hook heartbeat) |
+| **Question** | Bird tilts head with a question mark | Agent waiting for your input (via VS Code Hook heartbeat or manual API) |
 | **Finished** | Bird pecks screen, removes glasses, returns to idle | Claude Code process exits |
 
 Transitions happen automatically:
@@ -72,10 +72,27 @@ Or use the built-in process watcher — Vibe detects Claude Code automatically e
 
 ## How It Works
 
-1. **Foreground detection** (macOS: `osascript`, Windows: PowerShell) — checks if your terminal/editor is the active window.
+Vibe uses a three-layer detection system. Higher layers override lower ones.
+
+### Layer 1: Hook Heartbeat (VS Code Claude Code only)
+
+A Claude Code plugin (`~/.claude/plugins/vibe-status/`) pushes precise lifecycle events directly to Vibe:
+
+| Event | Vibe State | Meaning |
+|-------|-----------|---------|
+| `UserPromptSubmit` / `PreToolUse` / `PostToolUse` | **coding** | Agent is actively working |
+| `Stop` | **idle** | Session ended |
+
+This is **semantic detection** — Vibe knows the Agent's intent, not just its CPU usage.
+
+### Layer 2: Process Detection (Fallback)
+
+For CLI users or when the Hook plugin is not loaded:
+
+1. **Foreground detection** (macOS: `osascript`, Windows: PowerShell) — checks if your terminal/editor is active.
 2. **Process detection** — scans for `opencode` or `claude` processes.
-3. **CPU heuristic** — high CPU = coding; sustained low CPU for 10s = question.
-4. **Debounced state changes** — a state must be stable for 6 seconds before the bird reacts, preventing flicker.
+3. **CPU heuristic** (macOS) — high CPU = agent generating; low CPU = user typing or agent idle.
+4. **Debounced state changes** — a state must be stable for 6 seconds before switching, preventing flicker.
 
 ## Build from Source
 
@@ -122,8 +139,13 @@ petintable/
 **"App can't be opened" on macOS**
 - Right-click `Vibe.app` → Open, or go to **System Settings → Privacy & Security** and allow it.
 
+**Bird types while I'm typing**
+- If you use VS Code Claude Code, make sure the `vibe-status` plugin is active in `~/.claude/plugins/`. With Hook heartbeat, the bird only types when the Agent is actually generating.
+- If you use CLI Claude Code or OpenCode, Vibe falls back to CPU detection. On macOS, low CPU = idle. On Windows, CPU detection is not yet implemented.
+
 **Bird flickers between states**
-- This should not happen with debounce (v0.1.1+). If it does, file an issue with your OS and terminal app.
+- Hook heartbeat (VS Code) does not flicker — it uses exact semantic events.
+- If using CLI / OpenCode (process fallback), debounce (6s stable) prevents flicker.
 
 ## License
 

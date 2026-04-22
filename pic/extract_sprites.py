@@ -75,24 +75,88 @@ def find_content_bbox(cell_img):
     return (cmin, rmin, cmax + 1, rmax + 1)  # left, top, right, bottom
 
 
-def place_on_canvas(cropped, canvas_size):
+def find_foot_anchor(cell_img, bbox):
     """
-    底部居中放置到 canvas_size × canvas_size 透明画布。
-    如果裁剪图比画布大，等比缩放使高度适配，保持像素风用 NEAREST。
+    取 bbox 下方 25% 区域的非透明像素中位数 x，作为该帧的脚锚点。
+    返回值：在原始 cell 坐标系下的 x 坐标（float）。
     """
-    cw, ch = cropped.size
-    scale = min(canvas_size / cw, canvas_size / ch)
-    if scale < 1.0:
-        new_w = max(1, int(cw * scale))
-        new_h = max(1, int(ch * scale))
-        cropped = cropped.resize((new_w, new_h), Image.NEAREST)
-        cw, ch = new_w, new_h
+    arr = np.array(cell_img)
+    alpha = arr[:, :, 3]
+    bbox_h = bbox[3] - bbox[1]
+    bottom_y = int(bbox[1] + bbox_h * 0.75)
+    bottom = alpha[bottom_y:bbox[3], bbox[0]:bbox[2]]
+    cols_with_content = np.any(bottom > 0, axis=0)
+    foot_cols = np.where(cols_with_content)[0]
+    if len(foot_cols) == 0:
+        return (bbox[0] + bbox[2]) / 2
+    return bbox[0] + float(np.median(foot_cols))
+
+
+def place_on_canvas_aligned_v2(cropped, bbox, frame_anchor_x, group_scale, canvas_size):
+    """
+    使用脚锚点对齐 + 组级统一缩放，把 cropped 帧放到 canvas_size × canvas_size 透明画布。
+    """
+    content_w = bbox[2] - bbox[0]
+    content_h = bbox[3] - bbox[1]
+
+    scaled_w = max(1, int(content_w * group_scale))
+    scaled_h = max(1, int(content_h * group_scale))
+
+    if group_scale < 1.0:
+        cropped = cropped.resize((scaled_w, scaled_h), Image.NEAREST)
+
+    anchor_in_crop = (frame_anchor_x - bbox[0]) * group_scale
+    canvas_center = canvas_size / 2
+    x = int(round(canvas_center - anchor_in_crop))
+    y = canvas_size - scaled_h
 
     canvas = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-    x = (canvas_size - cw) // 2
-    y = canvas_size - ch  # bottom align
     canvas.paste(cropped, (x, y), cropped)
     return canvas
+
+
+# 最终同步到应用资产目录的白名单
+ASSET_STATES = [
+    "idle_no_glasses",
+    "equip_glasses",
+    "coding",
+    "question",
+    "knock",
+    "wearglass_idle",
+]
+
+
+def sync_to_assets():
+    """将 pic/sprites/ 中白名单内的动画组同步到 ../assets/sprites/"""
+    src_base = OUTPUT_DIR
+    dst_base = os.path.join(os.path.dirname(__file__), "..", "assets", "sprites")
+    os.makedirs(dst_base, exist_ok=True)
+
+    for state_name in ASSET_STATES:
+        src_dir = os.path.join(src_base, state_name)
+        dst_dir = os.path.join(dst_base, state_name)
+        if not os.path.exists(src_dir):
+            print(f"  ⚠ 跳过同步: {state_name} 不存在于 {src_base}")
+            continue
+
+        # 清空目标目录，确保无残留旧帧
+        if os.path.exists(dst_dir):
+            for f in os.listdir(dst_dir):
+                if f.endswith(".png"):
+                    os.remove(os.path.join(dst_dir, f))
+        else:
+            os.makedirs(dst_dir, exist_ok=True)
+
+        for f in os.listdir(src_dir):
+            if f.endswith(".png"):
+                src_path = os.path.join(src_dir, f)
+                dst_path = os.path.join(dst_dir, f)
+                with open(src_path, "rb") as sf:
+                    with open(dst_path, "wb") as df:
+                        df.write(sf.read())
+        print(f"  → 已同步: {state_name}")
+
+    print(f"\n资产同步完成 → {dst_base}/")
 
 
 def extract_all():
@@ -104,16 +168,41 @@ def extract_all():
         out_dir = os.path.join(OUTPUT_DIR, state_name)
         os.makedirs(out_dir, exist_ok=True)
 
-        frames = []
+        # ─── 第一遍：收集 bbox + 锚点 + 计算组级参数 ───
+        bboxes = []
         for col in range(col_start, col_end + 1):
             cell, cell_w, cell_h = get_cell(img, row, col)
             bbox = find_content_bbox(cell)
+            bboxes.append((col, cell, cell_w, cell_h, bbox))
+
+        valid_bboxes = [b for *_, b in bboxes if b is not None]
+        if not valid_bboxes:
+            print(f"  ⚠ 跳过空动画组: {state_name}")
+            continue
+
+        group_max_w = max(b[2] - b[0] for b in valid_bboxes)
+        group_max_h = max(b[3] - b[1] for b in valid_bboxes)
+        group_scale = min(CANVAS_SIZE / group_max_w, CANVAS_SIZE / group_max_h, 1.0)
+
+        foot_anchors = [
+            find_foot_anchor(cell, bbox)
+            for col, cell, cell_w, cell_h, bbox in bboxes
+            if bbox is not None
+        ]
+        unified_anchor_x = sorted(foot_anchors)[len(foot_anchors) // 2]
+
+        # ─── 第二遍：用 group_scale + 每帧锚点渲染 ───
+        frames = []
+        for col, cell, cell_w, cell_h, bbox in bboxes:
             if bbox is None:
                 print(f"  ⚠ 空帧: {state_name} row={row} col={col}")
                 continue
 
             cropped = cell.crop(bbox)
-            canvas = place_on_canvas(cropped, CANVAS_SIZE)
+            frame_anchor_x = find_foot_anchor(cell, bbox)
+            canvas = place_on_canvas_aligned_v2(
+                cropped, bbox, frame_anchor_x, group_scale, CANVAS_SIZE
+            )
 
             frame_idx = col - col_start
             frame_path = f"frame_{frame_idx:02d}.png"
@@ -123,6 +212,7 @@ def extract_all():
                 "source": f"{filename}:row{row}:col{col}",
                 "orig_bbox": [int(v) for v in bbox],
                 "orig_size": (int(cell_w), int(cell_h)),
+                "foot_anchor_x": round(frame_anchor_x, 2),
             })
 
         manifest[state_name] = {
@@ -130,16 +220,23 @@ def extract_all():
             "source_file": filename,
             "row": row,
             "col_range": [col_start, col_end],
+            "group_scale": round(group_scale, 4),
+            "unified_anchor_x": round(unified_anchor_x, 2),
             "frame_files": frames,
         }
-        print(f"✓ {state_name}: {len(frames)} frames extracted")
+        print(
+            f"✓ {state_name}: {len(frames)} frames "
+            f"(scale={group_scale:.3f}, anchor_x={unified_anchor_x:.1f})"
+        )
 
     with open(os.path.join(OUTPUT_DIR, "manifest.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
 
     print(f"\n全量导出完成 → {OUTPUT_DIR}/")
     print(f"共 {len(manifest)} 组动画")
-    print("请检查每组输出，确认映射关系后调整 STATE_MAP 做正式导出。")
+
+    print("\n--- 同步到 assets/sprites/ ---")
+    sync_to_assets()
 
 
 if __name__ == "__main__":

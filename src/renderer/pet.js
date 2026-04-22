@@ -59,10 +59,10 @@
   let currentAnimState = "idle_no_glasses"; // what's currently playing
   let hasGlasses = false;
   let frameIndex = 0;
-  let lastFrameTime = 0;
   let images = {};
   let dragStart = null;
   let animQueue = null; // queued animation after once completes
+  let animTimer = null; // setTimeout handle, null when not ticking
 
   // ── Preload images ─────────────────────────────────────
   function preloadAll() {
@@ -130,37 +130,46 @@
 
     currentAnimState = first;
     frameIndex = 0;
-    lastFrameTime = performance.now();
     drawFrame();
+    startTicking();
   }
 
   // ── Render loop ─────────────────────────────────────────
-  function animate(timestamp) {
+  // Use setTimeout instead of requestAnimationFrame to tick only at
+  // the animation's target FPS. When a "once" animation finishes and
+  // nothing is queued, the timer stops completely — zero CPU.
+
+  function tick() {
     const cfg = STATES[currentAnimState];
-    if (!cfg) { requestAnimationFrame(animate); return; }
+    if (!cfg) { animTimer = null; return; }
 
-    const interval = 1000 / cfg.fps;
+    frameIndex++;
 
-    if (timestamp - lastFrameTime >= interval) {
-      lastFrameTime = timestamp;
-      frameIndex++;
-
-      if (cfg.mode === "once" && frameIndex >= cfg.frames) {
-        // once animation finished, play next in queue or hold last frame
-        if (animQueue && animQueue.length > 0) {
-          playSequence(animQueue);
-          requestAnimationFrame(animate);
-          return;
-        }
-        frameIndex = cfg.frames - 1;
-      } else if (cfg.mode === "loop") {
-        frameIndex = frameIndex % cfg.frames;
+    if (cfg.mode === "once" && frameIndex >= cfg.frames) {
+      // once animation finished, play next in queue or hold last frame
+      if (animQueue && animQueue.length > 0) {
+        playSequence(animQueue);
+        return; // playSequence restarts the timer
       }
-
+      frameIndex = cfg.frames - 1;
       drawFrame();
+      animTimer = null; // stop ticking, hold last frame
+      return;
     }
 
-    requestAnimationFrame(animate);
+    if (cfg.mode === "loop") {
+      frameIndex = frameIndex % cfg.frames;
+    }
+
+    drawFrame();
+
+    // schedule next tick at the state's target FPS
+    animTimer = setTimeout(tick, 1000 / cfg.fps);
+  }
+
+  function startTicking() {
+    if (animTimer) clearTimeout(animTimer);
+    animTimer = setTimeout(tick, 1000 / STATES[currentAnimState].fps);
   }
 
   function drawFrame() {
@@ -220,6 +229,6 @@
   // ── Init ────────────────────────────────────────────────
   preloadAll().then(() => {
     drawFrame();
-    requestAnimationFrame(animate);
+    startTicking();
   });
 })();
