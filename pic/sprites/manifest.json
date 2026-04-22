@@ -1,0 +1,1109 @@
+{
+  "idle_no_glasses": {
+    "frames": 8,
+    "source_file": "idle without glass.png",
+    "row": 0,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "idle without glass.png:row0:col0",
+        "orig_bbox": [
+          32,
+          47,
+          169,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "idle without glass.png:row0:col1",
+        "orig_bbox": [
+          29,
+          47,
+          165,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "idle without glass.png:row0:col2",
+        "orig_bbox": [
+          24,
+          47,
+          162,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "idle without glass.png:row0:col3",
+        "orig_bbox": [
+          18,
+          47,
+          153,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "idle without glass.png:row0:col4",
+        "orig_bbox": [
+          18,
+          47,
+          153,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "idle without glass.png:row0:col5",
+        "orig_bbox": [
+          12,
+          47,
+          147,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "idle without glass.png:row0:col6",
+        "orig_bbox": [
+          6,
+          47,
+          142,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "idle without glass.png:row0:col7",
+        "orig_bbox": [
+          3,
+          47,
+          138,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "equip_glasses": {
+    "frames": 8,
+    "source_file": "wear glass.png",
+    "row": 0,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "wear glass.png:row0:col0",
+        "orig_bbox": [
+          32,
+          47,
+          169,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "wear glass.png:row0:col1",
+        "orig_bbox": [
+          29,
+          47,
+          165,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "wear glass.png:row0:col2",
+        "orig_bbox": [
+          24,
+          47,
+          176,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "wear glass.png:row0:col3",
+        "orig_bbox": [
+          18,
+          47,
+          170,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "wear glass.png:row0:col4",
+        "orig_bbox": [
+          18,
+          47,
+          165,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "wear glass.png:row0:col5",
+        "orig_bbox": [
+          12,
+          47,
+          154,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "wear glass.png:row0:col6",
+        "orig_bbox": [
+          6,
+          47,
+          147,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "wear glass.png:row0:col7",
+        "orig_bbox": [
+          3,
+          47,
+          138,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "wear_row1": {
+    "frames": 8,
+    "source_file": "wear glass.png",
+    "row": 1,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "wear glass.png:row1:col0",
+        "orig_bbox": [
+          24,
+          42,
+          158,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "wear glass.png:row1:col1",
+        "orig_bbox": [
+          24,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "wear glass.png:row1:col2",
+        "orig_bbox": [
+          17,
+          42,
+          170,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "wear glass.png:row1:col3",
+        "orig_bbox": [
+          12,
+          42,
+          165,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "wear glass.png:row1:col4",
+        "orig_bbox": [
+          11,
+          42,
+          159,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "wear glass.png:row1:col5",
+        "orig_bbox": [
+          5,
+          42,
+          149,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "wear glass.png:row1:col6",
+        "orig_bbox": [
+          0,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "wear glass.png:row1:col7",
+        "orig_bbox": [
+          0,
+          42,
+          138,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "wear_row2": {
+    "frames": 8,
+    "source_file": "wear glass.png",
+    "row": 2,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "wear glass.png:row2:col0",
+        "orig_bbox": [
+          23,
+          38,
+          159,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "wear glass.png:row2:col1",
+        "orig_bbox": [
+          23,
+          38,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "wear glass.png:row2:col2",
+        "orig_bbox": [
+          17,
+          38,
+          170,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "wear glass.png:row2:col3",
+        "orig_bbox": [
+          12,
+          38,
+          164,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "wear glass.png:row2:col4",
+        "orig_bbox": [
+          6,
+          38,
+          159,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "wear glass.png:row2:col5",
+        "orig_bbox": [
+          0,
+          38,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "wear glass.png:row2:col6",
+        "orig_bbox": [
+          0,
+          38,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "wear glass.png:row2:col7",
+        "orig_bbox": [
+          0,
+          38,
+          138,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "wear_row3": {
+    "frames": 8,
+    "source_file": "wear glass.png",
+    "row": 3,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "wear glass.png:row3:col0",
+        "orig_bbox": [
+          23,
+          34,
+          170,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "wear glass.png:row3:col1",
+        "orig_bbox": [
+          23,
+          28,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "wear glass.png:row3:col2",
+        "orig_bbox": [
+          17,
+          28,
+          173,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "wear glass.png:row3:col3",
+        "orig_bbox": [
+          14,
+          28,
+          168,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "wear glass.png:row3:col4",
+        "orig_bbox": [
+          9,
+          28,
+          162,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "wear glass.png:row3:col5",
+        "orig_bbox": [
+          4,
+          28,
+          153,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "wear glass.png:row3:col6",
+        "orig_bbox": [
+          0,
+          28,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "wear glass.png:row3:col7",
+        "orig_bbox": [
+          0,
+          28,
+          138,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "wearglass_idle": {
+    "frames": 8,
+    "source_file": "with glass.png",
+    "row": 0,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "with glass.png:row0:col0",
+        "orig_bbox": [
+          32,
+          47,
+          169,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "with glass.png:row0:col1",
+        "orig_bbox": [
+          29,
+          47,
+          165,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "with glass.png:row0:col2",
+        "orig_bbox": [
+          24,
+          47,
+          162,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "with glass.png:row0:col3",
+        "orig_bbox": [
+          18,
+          47,
+          165,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "with glass.png:row0:col4",
+        "orig_bbox": [
+          9,
+          47,
+          153,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "with glass.png:row0:col5",
+        "orig_bbox": [
+          12,
+          47,
+          147,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "with glass.png:row0:col6",
+        "orig_bbox": [
+          6,
+          47,
+          142,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "with glass.png:row0:col7",
+        "orig_bbox": [
+          3,
+          47,
+          138,
+          188
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "coding": {
+    "frames": 8,
+    "source_file": "with glass.png",
+    "row": 1,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "with glass.png:row1:col0",
+        "orig_bbox": [
+          24,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "with glass.png:row1:col1",
+        "orig_bbox": [
+          0,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "with glass.png:row1:col2",
+        "orig_bbox": [
+          0,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "with glass.png:row1:col3",
+        "orig_bbox": [
+          12,
+          42,
+          170,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "with glass.png:row1:col4",
+        "orig_bbox": [
+          11,
+          25,
+          164,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "with glass.png:row1:col5",
+        "orig_bbox": [
+          0,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "with glass.png:row1:col6",
+        "orig_bbox": [
+          0,
+          42,
+          176,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "with glass.png:row1:col7",
+        "orig_bbox": [
+          0,
+          42,
+          152,
+          184
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "question": {
+    "frames": 8,
+    "source_file": "with glass.png",
+    "row": 2,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "with glass.png:row2:col0",
+        "orig_bbox": [
+          23,
+          15,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "with glass.png:row2:col1",
+        "orig_bbox": [
+          0,
+          15,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "with glass.png:row2:col2",
+        "orig_bbox": [
+          0,
+          15,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "with glass.png:row2:col3",
+        "orig_bbox": [
+          0,
+          15,
+          171,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "with glass.png:row2:col4",
+        "orig_bbox": [
+          9,
+          15,
+          162,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "with glass.png:row2:col5",
+        "orig_bbox": [
+          0,
+          15,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "with glass.png:row2:col6",
+        "orig_bbox": [
+          0,
+          15,
+          176,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "with glass.png:row2:col7",
+        "orig_bbox": [
+          0,
+          15,
+          153,
+          179
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  },
+  "knock": {
+    "frames": 8,
+    "source_file": "with glass.png",
+    "row": 3,
+    "col_range": [
+      0,
+      7
+    ],
+    "frame_files": [
+      {
+        "file": "frame_00.png",
+        "source": "with glass.png:row3:col0",
+        "orig_bbox": [
+          23,
+          34,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_01.png",
+        "source": "with glass.png:row3:col1",
+        "orig_bbox": [
+          23,
+          34,
+          173,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_02.png",
+        "source": "with glass.png:row3:col2",
+        "orig_bbox": [
+          17,
+          34,
+          168,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_03.png",
+        "source": "with glass.png:row3:col3",
+        "orig_bbox": [
+          12,
+          34,
+          166,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_04.png",
+        "source": "with glass.png:row3:col4",
+        "orig_bbox": [
+          6,
+          34,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_05.png",
+        "source": "with glass.png:row3:col5",
+        "orig_bbox": [
+          0,
+          34,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_06.png",
+        "source": "with glass.png:row3:col6",
+        "orig_bbox": [
+          0,
+          35,
+          176,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      },
+      {
+        "file": "frame_07.png",
+        "source": "with glass.png:row3:col7",
+        "orig_bbox": [
+          0,
+          34,
+          151,
+          169
+        ],
+        "orig_size": [
+          176,
+          192
+        ]
+      }
+    ]
+  }
+}

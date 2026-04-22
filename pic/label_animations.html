@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>动画标注工具</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0d0d1a;
+    color: #fff;
+    padding: 24px;
+    min-height: 100vh;
+}
+h1 { color: #00d4aa; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+.card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    transition: border-color 0.2s;
+}
+.card:hover { border-color: rgba(0,212,170,0.4); }
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.card-title { font-size: 15px; font-weight: 600; }
+.frame-counter { font-size: 12px; color: #888; }
+.preview-area {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: repeating-conic-gradient(#1a1a2e 0% 25%, #111 0% 50%) 0 0 / 16px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.preview-area canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.controls button {
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+}
+.controls button:hover { background: rgba(0,212,170,0.3); }
+.controls button.active { background: #00d4aa; color: #000; }
+.speed-label { font-size: 12px; color: #888; }
+.speed-slider { flex: 1; }
+.frame-strip {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 4px 0;
+    margin-bottom: 12px;
+}
+.frame-strip canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    flex-shrink: 0;
+}
+.frame-strip canvas.current { border-color: #00d4aa; }
+.frame-strip canvas:hover { border-color: rgba(0,212,170,0.5); }
+.label-area { display: flex; gap: 8px; align-items: center; }
+.label-area label { font-size: 12px; color: #888; white-space: nowrap; }
+.label-area input, .label-area select {
+    flex: 1;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 13px;
+}
+.label-area select option { background: #1a1a2e; }
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0d0d1aee;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.export-btn {
+    padding: 10px 24px;
+    background: #00d4aa;
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+.export-btn:hover { background: #00e8b8; }
+.status { font-size: 13px; color: #888; }
+</style>
+</head>
+<body>
+<h1>动画标注工具</h1>
+<div class="subtitle">点击播放每个动画 → 从下拉菜单选择或输入标签名 → 导出配置</div>
+<div class="grid" id="grid"></div>
+<div class="footer">
+    <div class="status" id="status">标注后点击导出，生成 animations.json</div>
+    <button class="export-btn" onclick="exportLabels()">导出配置</button>
+</div>
+
+<script>
+const ANIMATIONS = [{"source": "idle without glass.jpg", "name": "idle without glass", "frame_count": 8, "frames": [{"file": "idle without glass/frame_00.png", "width": 325, "height": 337}, {"file": "idle without glass/frame_01.png", "width": 319, "height": 337}, {"file": "idle without glass/frame_02.png", "width": 344, "height": 337}, {"file": "idle without glass/frame_03.png", "width": 319, "height": 337}, {"file": "idle without glass/frame_04.png", "width": 329, "height": 329}, {"file": "idle without glass/frame_05.png", "width": 327, "height": 328}, {"file": "idle without glass/frame_06.png", "width": 350, "height": 329}, {"file": "idle without glass/frame_07.png", "width": 320, "height": 328}], "orig_frame_width": 352, "orig_frame_height": 384}, {"source": "wear glass.jpg", "name": "wear glass", "frame_count": 8, "frames": [{"file": "wear glass/frame_00.png", "width": 331, "height": 337}, {"file": "wear glass/frame_01.png", "width": 349, "height": 337}, {"file": "wear glass/frame_02.png", "width": 344, "height": 337}, {"file": "wear glass/frame_03.png", "width": 319, "height": 337}, {"file": "wear glass/frame_04.png", "width": 332, "height": 329}, {"file": "wear glass/frame_05.png", "width": 347, "height": 330}, {"file": "wear glass/frame_06.png", "width": 350, "height": 329}, {"file": "wear glass/frame_07.png", "width": 317, "height": 330}], "orig_frame_width": 352, "orig_frame_height": 384}, {"source": "with glass.jpg", "name": "with glass", "frame_count": 8, "frames": [{"file": "with glass/frame_00.png", "width": 331, "height": 337}, {"file": "with glass/frame_01.png", "width": 349, "height": 337}, {"file": "with glass/frame_02.png", "width": 344, "height": 337}, {"file": "with glass/frame_03.png", "width": 331, "height": 337}, {"file": "with glass/frame_04.png", "width": 332, "height": 353}, {"file": "with glass/frame_05.png", "width": 350, "height": 353}, {"file": "with glass/frame_06.png", "width": 350, "height": 353}, {"file": "with glass/frame_07.png", "width": 332, "height": 353}], "orig_frame_width": 352, "orig_frame_height": 384}];
+
+// 预定义的标签选项（对应你的 6 个状态 + 自定义）
+const PRESET_LABELS = [
+    { value: '', text: '-- 选择标签 --' },
+    { value: 'idle_no_glasses', text: 'idle_no_glasses (待机-无眼镜)' },
+    { value: 'equip_glasses', text: 'equip_glasses (戴上眼镜)' },
+    { value: 'coding', text: 'coding (敲键盘)' },
+    { value: 'question', text: 'question (歪头疑问)' },
+    { value: 'knock', text: 'knock (啄击屏幕)' },
+    { value: 'remove_glasses', text: 'remove_glasses (摘下眼镜)' },
+    { value: 'idle_with_glasses', text: 'idle_with_glasses (待机-戴眼镜)' },
+    { value: '_custom', text: '✏️ 自定义...' },
+];
+
+const animStates = {};
+let allImages = {};
+
+async function loadAllImages() {
+    const promises = [];
+    for (const anim of ANIMATIONS) {
+        for (const frame of anim.frames) {
+            const p = new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => { allImages[frame.file] = img; resolve(); };
+                img.onerror = () => resolve();
+                img.src = 'frames/' + frame.file;
+            });
+            promises.push(p);
+        }
+    }
+    await Promise.all(promises);
+}
+
+function buildCards() {
+    const grid = document.getElementById('grid');
+    ANIMATIONS.forEach((anim, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="card-title">${anim.name}</span>
+                <span class="frame-counter">${anim.frame_count} 帧</span>
+            </div>
+            <div class="preview-area">
+                <canvas id="canvas-${idx}"></canvas>
+            </div>
+            <div class="controls">
+                <button onclick="togglePlay(${idx})" id="playbtn-${idx}">▶ 播放</button>
+                <button onclick="stepFrame(${idx}, -1)">◀</button>
+                <button onclick="stepFrame(${idx}, 1)">▶</button>
+                <input type="range" class="speed-slider" min="50" max="500" value="150"
+                       oninput="setSpeed(${idx}, this.value)">
+                <span class="speed-label" id="speed-${idx}">150ms</span>
+            </div>
+            <div class="frame-strip" id="strip-${idx}"></div>
+            <div class="label-area">
+                <label>标签:</label>
+                <select id="label-${idx}" onchange="onLabelChange(${idx}, this.value)">
+                    ${PRESET_LABELS.map(l => `<option value="${l.value}">${l.text}</option>`).join('')}
+                </select>
+                <input type="text" id="custom-${idx}" placeholder="自定义标签名"
+                       style="display:none" oninput="setLabel(${idx}, this.value)">
+            </div>
+        `;
+        grid.appendChild(card);
+
+        animStates[idx] = {
+            currentFrame: 0,
+            playing: false,
+            speed: 150,
+            interval: null,
+            maxScale: 1,
+        };
+
+        // Build frame strip
+        const strip = card.querySelector(`#strip-${idx}`);
+        anim.frames.forEach((frame, fi) => {
+            const c = document.createElement('canvas');
+            c.width = frame.width;
+            c.height = frame.height;
+            c.title = `帧 ${fi}`;
+            c.onclick = () => { animStates[idx].currentFrame = fi; drawFrame(idx); };
+            strip.appendChild(c);
+        });
+    });
+}
+
+function onLabelChange(idx, value) {
+    const customInput = document.getElementById(`custom-${idx}`);
+    if (value === '_custom') {
+        customInput.style.display = '';
+        customInput.focus();
+    } else {
+        customInput.style.display = 'none';
+    }
+}
+
+function setLabel(idx, value) {}
+
+function togglePlay(idx) {
+    const st = animStates[idx];
+    if (st.playing) {
+        clearInterval(st.interval);
+        st.playing = false;
+        document.getElementById(`playbtn-${idx}`).textContent = '▶ 播放';
+    } else {
+        st.playing = true;
+        document.getElementById(`playbtn-${idx}`).textContent = '⏸ 暂停';
+        st.interval = setInterval(() => {
+            st.currentFrame = (st.currentFrame + 1) % ANIMATIONS[idx].frame_count;
+            drawFrame(idx);
+        }, st.speed);
+    }
+}
+
+function stepFrame(idx, dir) {
+    const st = animStates[idx];
+    const total = ANIMATIONS[idx].frame_count;
+    st.currentFrame = (st.currentFrame + dir + total) % total;
+    drawFrame(idx);
+}
+
+function setSpeed(idx, ms) {
+    animStates[idx].speed = parseInt(ms);
+    document.getElementById(`speed-${idx}`).textContent = ms + 'ms';
+    if (animStates[idx].playing) {
+        clearInterval(animStates[idx].interval);
+        animStates[idx].interval = setInterval(() => {
+            animStates[idx].currentFrame = (animStates[idx].currentFrame + 1) % ANIMATIONS[idx].frame_count;
+            drawFrame(idx);
+        }, animStates[idx].speed);
+    }
+}
+
+function drawFrame(idx) {
+    const anim = ANIMATIONS[idx];
+    const st = animStates[idx];
+    const frame = anim.frames[st.currentFrame];
+    const img = allImages[frame.file];
+    if (!img) return;
+
+    const canvas = document.getElementById(`canvas-${idx}`);
+    const ctx = canvas.getContext('2d');
+
+    // Scale to fit preview area (max 200px height)
+    const maxH = 180;
+    const scale = Math.min(maxH / frame.height, maxH / frame.width, 2);
+    canvas.width = Math.round(frame.width * scale);
+    canvas.height = Math.round(frame.height * scale);
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    // Update strip highlights
+    const strip = document.getElementById(`strip-${idx}`);
+    const canvases = strip.querySelectorAll('canvas');
+    canvases.forEach((c, i) => {
+        c.classList.toggle('current', i === st.currentFrame);
+        // Draw strip frame thumbnails
+        if (allImages[anim.frames[i].file]) {
+            const tc = c.getContext('2d');
+            tc.imageSmoothingEnabled = false;
+            c.width = anim.frames[i].width;
+            c.height = anim.frames[i].height;
+            // Scale down for strip
+            const ts = Math.min(1, 48 / anim.frames[i].height);
+            c.style.height = Math.round(anim.frames[i].height * ts) + 'px';
+            c.style.width = Math.round(anim.frames[i].width * ts) + 'px';
+            tc.clearRect(0, 0, c.width, c.height);
+            tc.drawImage(allImages[anim.frames[i].file], 0, 0);
+        }
+    });
+}
+
+function exportLabels() {
+    const labels = {};
+    let unlabeled = 0;
+    ANIMATIONS.forEach((anim, idx) => {
+        const select = document.getElementById(`label-${idx}`);
+        const custom = document.getElementById(`custom-${idx}`);
+        let label = select.value === '_custom' ? custom.value.trim() : select.value;
+        if (label) {
+            labels[anim.name] = label;
+        } else {
+            unlabeled++;
+        }
+    });
+
+    if (unlabeled > 0) {
+        if (!confirm(`还有 ${unlabeled} 个动画未标注，确定要导出吗？`)) return;
+    }
+
+    // Build output JSON
+    const output = {
+        animations: ANIMATIONS.map((anim, idx) => ({
+            source: anim.source,
+            name: anim.name,
+            label: labels[anim.name] || '',
+            frame_count: anim.frame_count,
+            frames: anim.frames,
+            orig_frame_width: anim.orig_frame_width,
+            orig_frame_height: anim.orig_frame_height,
+        })),
+        labels: labels,
+    };
+
+    const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'labeled_animations.json';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    document.getElementById('status').textContent = `已导出！${Object.keys(labels).length} 个动画已标注`;
+}
+
+async function init() {
+    buildCards();
+    await loadAllImages();
+    // Draw first frame of each
+    ANIMATIONS.forEach((_, idx) => drawFrame(idx));
+}
+
+init();
+</script>
+</body>
+</html>
