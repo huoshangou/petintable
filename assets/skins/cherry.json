@@ -1,0 +1,16 @@
+{
+  "name": "blueberry",
+  "display_name": "蓝莓",
+  "description": "蓝色身体 + 浅蓝肚子，眼镜键盘保持原色。",
+  "overrides": {
+    "body_main": "#3a7fc2",
+    "body_shadow_1": "#1d4d85",
+    "body_shadow_2": "#3886cf",
+    "body_shadow_3": "#2f70b3",
+    "body_shadow_4": "#4a92d4",
+    "belly_main": "#e8f1fb",
+    "belly_shadow_1": "#dde9f7",
+    "belly_shadow_2": "#a8c1de",
+    "beak_main": "#2a3a5a"
+  }
+}

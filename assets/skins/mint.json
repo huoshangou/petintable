@@ -1,0 +1,19 @@
+{
+  "name": "mint",
+  "display_name": "薄荷",
+  "description": "薄荷绿身体 + 奶白肚子，眼镜键盘色调随主体调整。",
+  "overrides": {
+    "body_main": "#5fbf8e",
+    "body_shadow_1": "#3a8a5e",
+    "body_shadow_2": "#5cb888",
+    "body_shadow_3": "#4ea778",
+    "body_shadow_4": "#75ce9e",
+    "body_highlight": "#92dfb6",
+    "body_dark_1": "#3a6e4f",
+    "body_dark_2": "#aed3bb",
+    "belly_main": "#f1faf2",
+    "belly_shadow_1": "#e6f4e8",
+    "belly_shadow_2": "#a8d3b3",
+    "beak_main": "#2c4a3a"
+  }
+}

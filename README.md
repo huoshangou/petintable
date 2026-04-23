@@ -94,39 +94,86 @@ For CLI users or when the Hook plugin is not loaded:
 3. **CPU heuristic** (macOS) — high CPU = agent generating; low CPU = user typing or agent idle.
 4. **Debounced state changes** — a state must be stable for 6 seconds before switching, preventing flicker.
 
-## Build from Source
+## Develop
+
+Run from source:
 
 ```bash
 git clone https://github.com/YOURNAME/petintable.git
 cd petintable
 npm install
-npm start        # dev mode
-npm run build    # build for current platform
+npm start         # launches Vibe in dev mode
 ```
 
-Platform-specific builds:
+### Switch skins at runtime
+
+```bash
+curl 'http://localhost:3000/skins/list'             # list available skins
+curl 'http://localhost:3000/skin?name=blueberry'    # switch
+```
+
+Or **right-click the bird** → pick a skin from the menu.
+
+### Add a new skin
+
+1. Copy an existing skin JSON, edit the color overrides:
+
+   ```bash
+   cp assets/skins/blueberry.json assets/skins/cherry.json
+   # edit cherry.json — keys are role names from assets/skins/_roles.json
+   ```
+
+2. Generate the sprite frames:
+
+   ```bash
+   ./pic/venv/bin/python pic/apply_skin.py cherry
+   ```
+
+3. The new skin appears in `/skins/list` and the right-click menu immediately. No restart needed.
+
+### What are the color "roles"?
+
+`assets/skins/_roles.json` defines 16 named color slots (like `body_main`, `belly_shadow_1`, `glasses_frame`). A skin is just a partial override of these slots. To visually inspect what each role covers in the original sprites, regenerate the picker tool:
+
+```bash
+./pic/venv/bin/python pic/build_palette_picker.py
+open pic/_palette_picker/index.html
+```
+
+## Build for Distribution
+
 ```bash
 npm run build:mac   # macOS .dmg
 npm run build:win   # Windows .exe (run on Windows)
 ```
 
+Output goes to `dist/`.
+
 ## Project Structure
 
 ```
 petintable/
-├── main.js              # Electron main process + process watcher + HTTP server
-├── preload.js           # Secure IPC bridge
+├── main.js                    # Electron main: detection layers, HTTP API, skin manager
+├── preload.js                 # Secure IPC bridge
 ├── package.json
 ├── src/renderer/
-│   ├── index.html       # 64×64 canvas
-│   ├── styles.css       # Transparent, pixelated
-│   └── pet.js           # Animation state machine + hitbox + drag
-└── assets/sprites/      # Frame sequences (64×64 PNGs)
-    ├── idle_no_glasses/
-    ├── equip_glasses/
-    ├── coding/
-    ├── question/
-    └── knock/
+│   ├── index.html             # 64×64 canvas
+│   ├── styles.css
+│   └── pet.js                 # Animation manifest interpreter + hitbox + drag
+└── assets/
+    ├── animation_manifest.json   # State machine (states, transitions, tags)
+    ├── sprites/                  # Original sprite frames (skin source of truth)
+    └── skins/
+        ├── _roles.json           # 16 color role definitions
+        ├── <skin>.json           # Per-skin color overrides
+        └── <skin>/sprites/       # Generated sprite frames per skin (apply_skin.py output)
+
+pic/                          # Asset pipeline (not shipped to users)
+├── extract_sprites.py        # Sheet → per-frame PNGs with foot-anchor alignment
+├── apply_skin.py             # Apply a skin's overrides → assets/skins/<skin>/sprites/
+├── analyze_palette.py        # Palette diagnostics
+├── build_palette_picker.py   # Generates the interactive role-naming tool
+└── verify_sprites.html       # Visual frame-by-frame verification
 ```
 
 ## Troubleshooting

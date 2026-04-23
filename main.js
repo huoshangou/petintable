@@ -1,9 +1,13 @@
-const { app, BrowserWindow, ipcMain, screen } = require("electron");
+const { app, BrowserWindow, ipcMain, screen, Menu } = require("electron");
 const http = require("http");
 const fs = require("fs");
 const { execSync } = require("child_process");
 const path = require("path");
 const os = require("os");
+
+const SKINS_DIR = path.join(__dirname, "assets", "skins");
+const CONFIG_PATH = path.join(app.getPath("userData"), "vibe-config.json");
+let currentSkin = "default";
 
 // ── Electron startup tuning ─────────────────────────────
 // A 64×64 pixel pet does not need GPU compositing. Disabling it
@@ -316,6 +320,59 @@ function sendState(state) {
   }
 }
 
+// ── Skin management ──────────────────────────────────────
+
+function loadConfig() {
+  try {
+    const data = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
+    if (typeof data.skin === "string") currentSkin = data.skin;
+  } catch (_) { /* first run */ }
+}
+
+function saveConfig() {
+  try {
+    fs.mkdirSync(path.dirname(CONFIG_PATH), { recursive: true });
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify({ skin: currentSkin }), "utf8");
+  } catch (e) { console.error("[config] save failed:", e); }
+}
+
+function listSkins() {
+  if (!fs.existsSync(SKINS_DIR)) return [];
+  return fs.readdirSync(SKINS_DIR).filter(name => {
+    const sub = path.join(SKINS_DIR, name);
+    return fs.statSync(sub).isDirectory()
+      && fs.existsSync(path.join(sub, "sprites"));
+  }).sort();
+}
+
+function setSkin(name) {
+  const valid = listSkins();
+  if (!valid.includes(name)) {
+    return { ok: false, error: "skin not found", valid };
+  }
+  currentSkin = name;
+  saveConfig();
+  if (win && !win.isDestroyed()) {
+    win.webContents.send("skin-change", name);
+  }
+  return { ok: true, skin: name };
+}
+
+function showSkinMenu() {
+  const skins = listSkins();
+  const template = skins.map(name => ({
+    label: (name === currentSkin ? "✓ " : "  ") + name,
+    click: () => setSkin(name),
+  }));
+  template.push({ type: "separator" });
+  template.push({
+    label: "退出 Vibe",
+    click: () => app.quit(),
+  });
+  const menu = Menu.buildFromTemplate(template);
+  if (win) menu.popup({ window: win });
+}
+
 // ── HTTP API ───────────────────────────────────────────────
 
 function handleAction(action) {
@@ -375,6 +432,25 @@ function startHttpServer() {
       return;
     }
 
+    if (url.pathname === "/skin") {
+      const name = url.searchParams.get("name");
+      if (!name) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "missing name", valid: listSkins() }));
+        return;
+      }
+      const result = setSkin(name);
+      res.writeHead(result.ok ? 200 : 404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(result));
+      return;
+    }
+
+    if (url.pathname === "/skins/list") {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ current: currentSkin, available: listSkins() }));
+      return;
+    }
+
     res.writeHead(404);
     res.end("not found");
   });
@@ -387,6 +463,7 @@ function startHttpServer() {
 // ── Lifecycle ─────────────────────────────────────────────
 
 app.whenReady().then(() => {
+  loadConfig();
   createWindow();
   startHttpServer();
   schedulePoll();
@@ -398,6 +475,8 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => { app.quit(); });
 
+ipcMain.handle("get-current-skin", () => currentSkin);
+
 ipcMain.on("set-ignore-mouse-events", (_event, ignore) => {
   if (win && !win.isDestroyed()) win.setIgnoreMouseEvents(ignore, { forward: true });
 });
@@ -408,3 +487,5 @@ ipcMain.on("window-move", (_event, dx, dy) => {
     win.setPosition(x + dx, y + dy);
   }
 });
+
+ipcMain.on("show-context-menu", () => showSkinMenu());

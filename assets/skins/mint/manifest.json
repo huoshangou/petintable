@@ -1,0 +1,22 @@
+{
+  "skin": "mint",
+  "n_colors": 16,
+  "final_palette": {
+    "body_main": "#5fbf8e",
+    "body_shadow_1": "#3a8a5e",
+    "body_shadow_2": "#5cb888",
+    "body_shadow_3": "#4ea778",
+    "body_shadow_4": "#75ce9e",
+    "body_highlight": "#92dfb6",
+    "body_dark_1": "#3a6e4f",
+    "body_dark_2": "#aed3bb",
+    "belly_main": "#f1faf2",
+    "belly_shadow_1": "#e6f4e8",
+    "belly_shadow_2": "#a8d3b3",
+    "outline": "#290b06",
+    "outline_soft": "#0d1101",
+    "glasses_frame": "#0c0100",
+    "eye": "#4b1205",
+    "beak_main": "#2c4a3a"
+  }
+}

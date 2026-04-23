@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "default_state": "idle_no_glasses",
+  "default_tag": "no_glasses",
+  "states": {
+    "idle_no_glasses": { "frames": 8, "mode": "loop", "fps": 6 },
+    "equip_glasses":   { "frames": 8, "mode": "once", "fps": 10, "sets_tag": "glasses" },
+    "coding":          { "frames": 8, "mode": "loop", "fps": 8 },
+    "question":        { "frames": 8, "mode": "loop", "fps": 6 },
+    "knock":           { "frames": 8, "mode": "once", "fps": 10 },
+    "remove_glasses":  { "frames": 8, "mode": "once", "fps": 10, "reverse": true, "source": "equip_glasses", "sets_tag": "no_glasses" }
+  },
+  "transitions": {
+    "idle_no_glasses": [
+      { "if_tag": "glasses",    "sequence": ["knock", "remove_glasses", "idle_no_glasses"] },
+      { "default": true,        "sequence": ["idle_no_glasses"] }
+    ],
+    "coding": [
+      { "if_tag": "no_glasses", "sequence": ["equip_glasses", "coding"] },
+      { "default": true,        "sequence": ["coding"] }
+    ],
+    "question": [
+      { "if_tag": "no_glasses", "sequence": ["equip_glasses", "question"] },
+      { "default": true,        "sequence": ["question"] }
+    ]
+  }
+}
